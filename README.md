@@ -169,7 +169,7 @@ la transformada wavelet  toma la señal de intervalos R-R, la descompone en múl
 
 # RESULTADOS 
 - *1) grafica de la señal obtenida*
-- 
+
  [![imagen-2025-05-01-181032449.png](https://i.postimg.cc/G3g8Y9Gq/imagen-2025-05-01-181032449.png)](https://postimg.cc/kD8gPJjb)
 
 - *2) grafica de la señal obtenida con filtro*
@@ -180,3 +180,6 @@ la transformada wavelet  toma la señal de intervalos R-R, la descompone en múl
   
 [![imagen-2025-05-01-181332236.png](https://i.postimg.cc/1X8zMcwM/imagen-2025-05-01-181332236.png)](https://postimg.cc/m1GRg9dF)
 
+- *4) tabla con valores obtenido*
+
+[![imagen-2025-05-01-181737957.png](https://i.postimg.cc/DwkzdGZd/imagen-2025-05-01-181737957.png)](https://postimg.cc/ppCxPpKp)
