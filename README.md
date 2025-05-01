@@ -105,3 +105,29 @@ el codigo que se uso para esto fue el siguiente:
  El diseño del filtro se realiza en la función butter_lowpass, donde se calcula primero la frecuencia de Nyquist (la mitad de la frecuencia de muestreo) y se usa para normalizar la frecuencia de corte deseada tambien 
 muestra los coeficientes del filtro, que se usarán en la ecuación usando la ecuacion 
 y[n]=b 0 x[n]+b 1 x[n−1]+⋯−a 1 y[n−1]−a 2 y[n−2]+⋯
+
+- los parametros del filtro son:
+  
+  Orden del filtro (order): 5
+
+  Frecuencia de muestreo (fs): 250 Hz
+
+  Frecuencia de corte (cutoff): 45 Hz
+
+  Frecuencia de Nyquist: 125 Hz
+
+*3)Cálculo de la Frecuencia*
+
+La frecuencia de corte de 45 Hz fue elegida basada en criterios fisiológicos ya que Es lo suficientemente alto para conservar toda la información fisiológica relevante (especialmente el QRS, necesario para detectar picos R)
+ Pero lo suficientemente bajo para eliminar ruido no deseado de alta frecuenciay prácticos para preservar el ECG y eliminar ruido. Luego se normalizó dividiéndola entre la frecuencia de Nyquist (125 Hz) para usarla en el diseño digital del filtro. Así se obtuvo una frecuencia normalizada de 0.36, que es lo que el filtro realmente usa internamente.
+
+frecuencia normalizada= frecuencia de corte/frecuencia de Nyquist
+
+donde: 
+
+frecuencia de corte=45 Hz
+
+frecuencia de Nyquist= fs/2​ = 250/2 =125 Hz
+
+Frecuencia normalizada= 45/125 =0.36
+​
