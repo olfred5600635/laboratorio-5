@@ -10,7 +10,7 @@ Dominio del tiempo : Cálculo de parámetros como la media y desviación estánd
 
 Dominio tiempo-frecuencia : Aplicación de la Transformada Wavelet para observar variaciones espectrales en bandas de baja (LF: 0.04–0.15 Hz) y alta frecuencia (HF: 0.15–0.4 Hz), asociadas a la regulación autonómica.
 
-# Materiales y Equipos
+# MATERIAL Y EQUIPOS
 *Laboratorio*
 
 - Software :
@@ -27,15 +27,15 @@ Documentación : Guías teóricas sobre HRV y Transformada Wavelet.
 2)Sistema de adquisición de datos (DAQ, Arduino, STM32 u otros).
 3)Cables de conexión para electrodos y sistema DAQ.
 
-# Objetivo
+# OBJETIVO
 
 Analizar la variabilidad de la frecuencia cardíaca (HRV) utilizando la Transformada Wavelet para identificar cambios en las frecuencias características y estudiar la dinámica temporal de la señal cardíaca, con el fin de evaluar la actividad del sistema nervioso autónomo (simpático y parasimpático).
 
-# Resultados esperados 
+# RESULTADOS ESPERADOS
 
 El experimento debe demostrar que la Transformada Wavelet ofrece una ventaja sobre el análisis tradicional en el dominio del tiempo, al capturar variaciones dinámicas en la HRV que reflejan la interacción entre los sistemas simpático y parasimpático. 
 
-# Estructura del Experimento
+# ESTRUCUTURA DEL EXPERIMENTO 
 
 *1)Fundamento Teórico* 
 
@@ -72,7 +72,8 @@ se escoge al paciente de prueba y que este mismo este en condiciones de reposo c
 Se deben colocar los electrodos como se muestra en la imagen anterior, despues de colocar los electrodos el sujeto debe  permanezca inmóvil durante la grabación para evitar artefactos por movimiento.
 Ya con la preparacion atencian lo siguiente en resvisar es el sistema de adquisición (DAQ)concentado el módulo de captura AD8232  al sistema DAQ y Verificar que la frecuencia de muestreo sea ≥ 250 Hz.
 
-# Procedimiento 
+# PROCEDIMINETO 
+
 # *1)calculos del filtro*
 
 El filtro que fue usado es un filtro digital de tipo Butterworth pasa bajos. Este tipo de filtro se selecciono por su respuesta suave en frecuencia y porque no introduce ondulaciones en la banda pasante, lo cual es ideal para preservar la morfología de la señal cardiaca.
@@ -137,4 +138,36 @@ Frecuencia normalizada= 45/125 =0.36
 
 Los picos R se detectan con find_peaks() aplicada sobre la señal ECG filtrada. Se ajusta un umbral de altura y una distancia mínima entre picos para garantizar que solo se detecten los verdaderos picos R. Esta parte del código es fundamental porque los intervalos entre picos R son la base del análisis de HRV, tanto en el dominio del tiempo como en la transformada wavelet.
 
+# *4)Cálculo de Intervalos R-R*
 ​
+El cálculo de los intervalos R-R se hace tomando la diferencia entre las posiciones de los picos R consecutivos (np.diff(picos)) y dividiendo entre la frecuencia de muestreo (fs) para obtener el resultado en segundos. Estos valores representan el tiempo entre latidos y son fundamentales para calcular los parámetros de variabilidad de la frecuencia cardíaca.
+
+# *5)Desviación estándar de los intervalos R-R: Refleja la dispersión y la variabilidad general de la seña*
+
+    sdnn = np.std(intervalos_rr)
+
+
+ la línea sdnn = np.std(intervalos_rr) calcula la desviación estándar de todos los intervalos R-R detectados, lo cual representa la variabilidad global de la frecuencia cardíaca del sujeto durante los 5 minutos de grabación. Este valor es uno de los principales indicadores en el dominio del tiempo dentro del análisis de HRV.
+
+ # *6)Transformada Wavelet en Ventanas*
+
+    def calcular_espectrograma_wavelet(signal, fs):
+    scales = np.arange(1, 40)
+    wavelet = 'cmor1.5-1.0'
+    coef, freqs = pywt.cwt(signal, scales, wavelet, sampling_period=1/fs)
+
+    plt.figure(figsize=(12, 6))
+    plt.imshow(np.abs(coef), extent=[0, len(signal)/fs, scales.min(), scales.max()],
+               cmap='jet', aspect='auto', interpolation='bilinear')
+    plt.colorbar(label='Magnitud')
+    plt.xlabel("Tiempo (s)")
+    plt.ylabel("Escala (relacionada con frecuencia)")
+    plt.title("Espectrograma HRV con Transformada Wavelet Continua (Morlet)")
+    plt.show()
+
+la transformada wavelet  toma la señal de intervalos R-R, la descompone en múltiples escalas (frecuencias) usando la wavelet Morlet, y genera un espectrograma que muestra cómo varía la energía en diferentes bandas de frecuencia a lo largo del tiempo. Esto permite evaluar dinámicamente la actividad simpática y parasimpática, lo cual es el objetivo principal del laboratorio.
+
+# RESULTADOS 
+- *1) grafica de la señal obtenida*
+- 
+ [![imagen-2025-05-01-181032449.png](https://i.postimg.cc/G3g8Y9Gq/imagen-2025-05-01-181032449.png)](https://postimg.cc/kD8gPJjb)
