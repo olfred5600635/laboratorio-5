@@ -72,3 +72,36 @@ se escoge al paciente de prueba y que este mismo este en condiciones de reposo c
 Se deben colocar los electrodos como se muestra en la imagen anterior, despues de colocar los electrodos el sujeto debe  permanezca inmóvil durante la grabación para evitar artefactos por movimiento.
 Ya con la preparacion atencian lo siguiente en resvisar es el sistema de adquisición (DAQ)concentado el módulo de captura AD8232  al sistema DAQ y Verificar que la frecuencia de muestreo sea ≥ 250 Hz.
 
+# Procedimiento 
+*1)calculos del filtro*
+
+El filtro que fue usado es un filtro digital de tipo Butterworth pasa bajos. Este tipo de filtro se selecciono por su respuesta suave en frecuencia y porque no introduce ondulaciones en la banda pasante, lo cual es ideal para preservar la morfología de la señal cardiaca.
+
+ La elección de una frecuencia de corte de 45 Hz nos ayuda  a la necesidad de eliminar componentes de alta frecuencia, como el ruido muscular o interferencias electromagnéticas, sin afectar las componentes útiles del ECG,
+
+El orden 5 del filtro representa una buena capacidad de atenuación fuera de la banda de interés y la estabilidad computacional del sistema, ya que órdenes más altos podrían generar inestabilidades o distorsiones. Además, este diseño responde directamente a los objetivos  del laboratorio.
+
+el codigo que se uso para esto fue el siguiente:
+
+    from scipy.signal import butter, lfilter
+
+     def butter_lowpass(cutoff, fs, order=5):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+
+    print("\n--- Ecuación en diferencias del filtro IIR (Butterworth) ---")
+    print("Coeficientes b:", b)
+    print("Coeficientes a:", a)
+    print("Forma general: y[n] = Σ(b_i * x[n - i]) - Σ(a_j * y[n - j])")
+
+    return b, a
+
+    def butter_lowpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_lowpass(cutoff, fs, order)
+    y = lfilter(b, a, data)
+    return y
+
+ El diseño del filtro se realiza en la función butter_lowpass, donde se calcula primero la frecuencia de Nyquist (la mitad de la frecuencia de muestreo) y se usa para normalizar la frecuencia de corte deseada tambien 
+muestra los coeficientes del filtro, que se usarán en la ecuación usando la ecuacion 
+y[n]=b 0 x[n]+b 1 x[n−1]+⋯−a 1 y[n−1]−a 2 y[n−2]+⋯
