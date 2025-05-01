@@ -130,4 +130,11 @@ frecuencia de corte=45 Hz
 frecuencia de Nyquist= fs/2​ = 250/2 =125 Hz
 
 Frecuencia normalizada= 45/125 =0.36
+
+# *3)Detección de Picos R*
+
+    picos, _ = find_peaks(señal_filtrada, height=np.max(señal_filtrada)*0.5, distance=0.4*fs)
+
+Los picos R se detectan con find_peaks() aplicada sobre la señal ECG filtrada. Se ajusta un umbral de altura y una distancia mínima entre picos para garantizar que solo se detecten los verdaderos picos R. Esta parte del código es fundamental porque los intervalos entre picos R son la base del análisis de HRV, tanto en el dominio del tiempo como en la transformada wavelet.
+
 ​
