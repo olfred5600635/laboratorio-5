@@ -73,7 +73,7 @@ Se deben colocar los electrodos como se muestra en la imagen anterior, despues d
 Ya con la preparacion atencian lo siguiente en resvisar es el sistema de adquisición (DAQ)concentado el módulo de captura AD8232  al sistema DAQ y Verificar que la frecuencia de muestreo sea ≥ 250 Hz.
 
 # Procedimiento 
-*1)calculos del filtro*
+# *1)calculos del filtro*
 
 El filtro que fue usado es un filtro digital de tipo Butterworth pasa bajos. Este tipo de filtro se selecciono por su respuesta suave en frecuencia y porque no introduce ondulaciones en la banda pasante, lo cual es ideal para preservar la morfología de la señal cardiaca.
 
@@ -116,7 +116,7 @@ y[n]=b 0 x[n]+b 1 x[n−1]+⋯−a 1 y[n−1]−a 2 y[n−2]+⋯
 
   Frecuencia de Nyquist: 125 Hz
 
-*3)Cálculo de la Frecuencia*
+# *2)Cálculo de la Frecuencia*
 
 La frecuencia de corte de 45 Hz fue elegida basada en criterios fisiológicos ya que Es lo suficientemente alto para conservar toda la información fisiológica relevante (especialmente el QRS, necesario para detectar picos R)
  Pero lo suficientemente bajo para eliminar ruido no deseado de alta frecuenciay prácticos para preservar el ECG y eliminar ruido. Luego se normalizó dividiéndola entre la frecuencia de Nyquist (125 Hz) para usarla en el diseño digital del filtro. Así se obtuvo una frecuencia normalizada de 0.36, que es lo que el filtro realmente usa internamente.
