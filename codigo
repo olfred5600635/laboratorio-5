@@ -1,0 +1,104 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import butter, lfilter, find_peaks
+import pywt
+
+# Diseño del filtro IIR pasa bajos (Butterworth)
+def butter_lowpass(cutoff, fs, order=5):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    
+    print("\n--- Ecuación en diferencias del filtro IIR (Butterworth) ---")
+    print("Coeficientes b:", b)
+    print("Coeficientes a:", a)
+    print("Forma general: y[n] = Σ(b_i * x[n - i]) - Σ(a_j * y[n - j])")
+    
+    return b, a
+
+def butter_lowpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_lowpass(cutoff, fs, order)
+    y = lfilter(b, a, data)  # Condiciones iniciales asumidas en 0
+    return y
+
+def cargar_datos(nombre_archivo):
+    try:
+        tiempo, amplitud = np.loadtxt(nombre_archivo, delimiter=',', unpack=True, skiprows=3)
+        return tiempo, amplitud
+    except Exception as e:
+        print("Error al cargar los datos:", e)
+        return None, None
+
+def calcular_hrv(intervalos_rr):
+    media_rr = np.mean(intervalos_rr)
+    sdnn = np.std(intervalos_rr)
+    rmssd = np.sqrt(np.mean(np.diff(intervalos_rr)**2))
+    nn50 = np.sum(np.abs(np.diff(intervalos_rr)) > 0.05)
+    pnn50 = (nn50 / len(intervalos_rr)) * 100
+    return media_rr, sdnn, rmssd, nn50, pnn50
+
+def calcular_espectrograma_wavelet(signal, fs):
+    scales = np.arange(1, 40)
+    wavelet = 'cmor1.5-1.0'
+    coef, freqs = pywt.cwt(signal, scales, wavelet, sampling_period=1/fs)
+
+    plt.figure(figsize=(12, 6))
+    plt.imshow(np.abs(coef), extent=[0, len(signal)/fs, scales.min(), scales.max()],
+               cmap='jet', aspect='auto', interpolation='bilinear')
+    plt.colorbar(label='Magnitud')
+    plt.xlabel("Tiempo (s)")
+    plt.ylabel("Escala (relacionada con frecuencia)")
+    plt.title("Espectrograma HRV con Transformada Wavelet Continua (Morlet)")
+    plt.show()
+
+    print("\n--- Análisis del espectrograma ---")
+    print("En el espectrograma se observan variaciones en la energía de la señal HRV.")
+    print("Las bandas de baja frecuencia (LF, ~0.04–0.15 Hz) reflejan actividad simpática y parasimpática.")
+    print("Las bandas de alta frecuencia (HF, ~0.15–0.4 Hz) reflejan control parasimpático.")
+    print("Se pueden analizar los cambios de potencia espectral a lo largo del tiempo para inferir estados fisiológicos.")
+
+def main():
+    fs = 250  # Frecuencia de muestreo según cómo se generó la señal
+    cutoff = 45
+    archivo = 'C:/Users/valen/Downloads/ecg_5min_mixto.csv'
+
+    tiempo, amplitud = cargar_datos(archivo)
+
+    if tiempo is None or amplitud is None:
+        print("No se pudo cargar los datos.")
+        return
+
+    # Filtrado
+    señal_filtrada = butter_lowpass_filter(amplitud, cutoff, fs, order=5)
+
+    # Detección de picos R
+    picos, _ = find_peaks(señal_filtrada, height=np.max(señal_filtrada)*0.5, distance=0.4*fs)
+    intervalos_rr = np.diff(picos) / fs  # en segundos
+
+    # HRV en dominio del tiempo
+    media_rr, sdnn, rmssd, nn50, pnn50 = calcular_hrv(intervalos_rr)
+
+    print("\n--- Parámetros HRV en el dominio del tiempo ---")
+    print(f"Media R-R: {media_rr:.2f} s")
+    print(f"Desviación estándar R-R (SDNN): {sdnn:.2f} s")
+    print(f"RMSSD: {rmssd:.2f} s")
+    print(f"NN50: {nn50}")
+    print(f"pNN50: {pnn50:.2f}%")
+
+    # Gráfica ECG con picos R
+    plt.figure(figsize=(12, 5))
+    plt.plot(tiempo, señal_filtrada, label="ECG filtrado")
+    plt.plot(tiempo[picos], señal_filtrada[picos], 'ro', label="Picos R")
+    plt.xlabel("Tiempo (s)")
+    plt.ylabel("Amplitud")
+    plt.title("ECG con picos R detectados")
+    plt.legend()
+    plt.grid()
+    plt.tight_layout()
+    plt.show()
+
+    # Transformada Wavelet
+    calcular_espectrograma_wavelet(intervalos_rr, fs)
+
+if _name_ == "_main_":
+    main()
