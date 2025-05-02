@@ -176,14 +176,13 @@ la transformada wavelet  toma la señal de intervalos R-R, la descompone en múl
 
  [![imagen-2025-05-01-181152196.png](https://i.postimg.cc/65D8jSHZ/imagen-2025-05-01-181152196.png)](https://postimg.cc/dLjQDWcQ)
 
- La gráfica obtenida muestra una señal ECG de alta calidad, correctamente filtrada, con una detección precisa y regular de los picos R. La frecuencia cardíaca observada es estable y el ritmo se mantiene sostenido a lo largo del tiempo, lo cual indica que la adquisición de datos fue exitosa y estuvo libre de interferencias significativas. Esta calidad de señal es adecuada para realizar un análisis confiable de la variabilidad de la frecuencia cardíaca (HRV). Considerando la regularidad del patrón, los valores esperados para la media del intervalo R-R deberían encontrarse en el rango de 0.9 a 1.1 segundos, presentando una desviación moderada.
+ La gráfica obtenida muestra una señal ECG de alta calidad, correctamente filtrada, con una detección precisa y regular de los picos R. La frecuencia cardíaca observada es estable y el ritmo se mantiene sostenido a lo largo del tiempo, lo cual indica que la adquisición de datos fue exitosa y estuvo libre de interferencias significativas. 
 
 - *3) espectograma de la señal*
   
 [![imagen-2025-05-01-181332236.png](https://i.postimg.cc/1X8zMcwM/imagen-2025-05-01-181332236.png)](https://postimg.cc/m1GRg9dF)
 
-El espectrograma generado a partir de la Transformada Wavelet Continua (CWT) presenta un análisis tiempo-frecuencia limpio, bien localizado y técnicamente correcto. Los eventos espectrales identificados corresponden a fluctuaciones reales de la señal HRV, probablemente derivadas de los intervalos R-R procesados. La concentración de energía se ubica principalmente en las bandas de 10 a 40 Hz, lo que es coherente con el comportamiento esperado de las variaciones de frecuencia cardíaca. El uso de la wavelet compleja permitió representar adecuadamente la no estacionariedad de la señal, destacando eventos transitorios en el tiempo.
-
+El espectrograma generado a partir de la Transformada Wavelet Continua (CWT) presenta un análisis tiempo-frecuencia limpio, bien localizado y  correcto. Los eventos espectrales identificados corresponden a fluctuaciones reales de la señal HRV, probablemente derivadas de los intervalos R-R procesados. La concentración de energía se ubica principalmente en las bandas de 10 a 40 Hz, lo que es coherente con el comportamiento esperado de las variaciones de frecuencia cardíaca. 
 
 - *4) tabla con valores obtenido*
 
