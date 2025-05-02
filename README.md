@@ -49,13 +49,13 @@ Es el responsable de la respuesta "lucha o huida" (aumenta frecuencia cardíaca)
 
 Promueve la relajación ("descanso y digestión").
 
-- Variabilidad de la frecuencia cardíaca (HRV) :
+# Variabilidad de la frecuencia cardíaca (HRV) :
   
 Se mide mediante fluctuaciones en los intervalos R-R del ECG.
 
-Parámetros en dominio del tiempo : Media, SDNN (desviación estándar), RMSSD.
+*Parámetros en dominio del tiempo :* Media, SDNN (desviación estándar), RMSSD.
 
-- Bandas frecuenciales :
+# Bandas frecuenciales :
   
 LF (0.04–0.15 Hz) : Relacionada con actividad simpática.
 
@@ -85,7 +85,7 @@ Ya con la preparación  lo siguiente en resvisar es el sistema de adquisición (
 
 # PROCEDIMINETO 
 
-# *1)calculos del filtro*
+# *1) calculos del filtro*
 
 El filtro que fue usado es un filtro digital de tipo Butterworth pasa bajos. Este tipo de filtro se selecciono por su respuesta suave en frecuencia y porque no introduce ondulaciones en la banda pasante, lo cual es ideal para preservar la morfología de la señal cardiaca.
 
@@ -129,14 +129,14 @@ muestra los coeficientes del filtro, que se usarán en la ecuación usando la ec
 
   Frecuencia de Nyquist: 125 Hz
 
-# *2)Cálculo de la Frecuencia*
+# *2) Cálculo de la Frecuencia*
 
 La frecuencia de corte de 45 Hz fue elegida basada en criterios fisiológicos ya que Es lo suficientemente alto para conservar toda la información fisiológica relevante (especialmente el QRS, necesario para detectar picos R)
  Pero lo suficientemente bajo para eliminar ruido no deseado de alta frecuenciay prácticos para preservar el ECG y eliminar ruido. Luego se normalizó dividiéndola entre la frecuencia de Nyquist (125 Hz) para usarla en el diseño digital del filtro. Así se obtuvo una frecuencia normalizada de 0.36, que es lo que el filtro realmente usa internamente.
 
-frecuencia normalizada= frecuencia de corte/frecuencia de Nyquist
+frecuencia normalizada = frecuencia de corte/frecuencia de Nyquist
 
-donde: 
+- donde: 
 
 frecuencia de corte=45 Hz
 
