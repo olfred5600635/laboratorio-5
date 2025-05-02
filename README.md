@@ -189,6 +189,7 @@ El espectrograma generado a partir de la Transformada Wavelet Continua (CWT) pre
 [![imagen-2025-05-01-181737957.png](https://i.postimg.cc/DwkzdGZd/imagen-2025-05-01-181737957.png)](https://postimg.cc/ppCxPpKp)
 
  - *Media R-R: 1.805 s*
+   
 Significa que, en promedio, el tiempo entre dos latidos es de 1.805 segundos.
 
 Esto equivale a una frecuencia cardíaca promedio de aproximadamente 33.2 latidos por minuto (calculado como 
@@ -199,6 +200,7 @@ que por esta razon se obtuvo un valor tan pequeño y no tan alto como deberia .
 
 
  - *SDNN (Desviación estándar de R-R): 0.378 s (378 ms)*
+   
 Representa la variabilidad total del ritmo cardíaco.
 
 Un valor de 0.378 s (378 ms) es moderadamente alto, lo que indica una buena capacidad del sistema nervioso autónomo para adaptarse a diferentes estímulos como el que se le dio 
@@ -206,13 +208,16 @@ generandole estres al paciente observado el valor tan alto .
 Es un buen indicador de salud cardíaca general si no hay errores en la señal.
 
 - *RMSSD: 0.142 s (142 ms)*
+  
 Refleja la variabilidad de corto plazo, asociada a la actividad parasimpática ,Un valor de 142 ms es considerado elevado, lo cual puede ser positivo y reflejar relajación, buena recuperación o bajo estrés.
 
 - *NN50: 202*
+  
 Es el número de veces que el intervalo R-R cambió más de 50 ms entre un latido y el siguiente.
 Valor relativamente alto → indica variaciones activas en el sistema nervioso autónomo.
 202 cambios significativos indican una señal dinámica y rica en fluctuaciones fisiológicas del paciente.
 
 - *pNN50: 48.91%*
+  
 ES el Porcentaje de intervalos que difieren más de 50 ms.
 Un valor cercano al 50% es muy bueno, y nos refleja una alta variabilidad cardíaca, típica en personas con buena salud y bajo estrés aunque esto es un pco conrtadictorio sabiendo que el paciente tiene  bradicardia pero al no ser tan notable puede dar ese resultado.
