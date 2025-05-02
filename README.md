@@ -2,6 +2,7 @@
 laboratorio 5
 
 [![Diagrama-Flujos-1.png](https://i.postimg.cc/FKqKJXB0/Diagrama-Flujos-1.png)](https://postimg.cc/TyVxZFGP)
+[![Diagrama-1.png](https://i.postimg.cc/XY60M5VN/Diagrama-1.png)](https://postimg.cc/4mP0Vm7j)
 
 # Descripción del Experimento
 El experimento se enfoca en analizar la variabilidad de la frecuencia cardíaca (HRV) utilizando la Transformada Wavelet para identificar cambios en las frecuencias características y estudiar la dinámica temporal de la señal cardíaca. Esto permite evaluar la actividad del sistema nervioso autónomo (simpático y parasimpático) a través de las fluctuaciones en los intervalos R-R del electrocardiograma (ECG). El análisis se realiza en dos dominios:
