@@ -1,5 +1,5 @@
-# laboratorio-5
-laboratorio 5
+# laboratorio 5
+
 
 [![Diagrama-Flujos-1.png](https://i.postimg.cc/FKqKJXB0/Diagrama-Flujos-1.png)](https://postimg.cc/TyVxZFGP)
 [![Diagrama-1.png](https://i.postimg.cc/XY60M5VN/Diagrama-1.png)](https://postimg.cc/4mP0Vm7j)
@@ -7,20 +7,19 @@ laboratorio 5
 # Descripción del Experimento
 El experimento se enfoca en analizar la variabilidad de la frecuencia cardíaca (HRV) utilizando la Transformada Wavelet para identificar cambios en las frecuencias características y estudiar la dinámica temporal de la señal cardíaca. Esto permite evaluar la actividad del sistema nervioso autónomo (simpático y parasimpático) a través de las fluctuaciones en los intervalos R-R del electrocardiograma (ECG). El análisis se realiza en dos dominios:
 
-Dominio del tiempo : Cálculo de parámetros como la media y desviación estándar de los intervalos R-R.
+- *Dominio del tiempo :* Cálculo de parámetros como la media y desviación estándar de los intervalos R-R.
 
-Dominio tiempo-frecuencia : Aplicación de la Transformada Wavelet para observar variaciones espectrales en bandas de baja (LF: 0.04–0.15 Hz) y alta frecuencia (HF: 0.15–0.4 Hz), asociadas a la regulación autonómica.
+- *Dominio tiempo-frecuencia :* Aplicación de la Transformada Wavelet para observar variaciones espectrales en bandas de baja (LF: 0.04–0.15 Hz) y alta frecuencia (HF: 0.15–0.4 Hz), asociadas a la regulación autonómica.
 
 # MATERIAL Y EQUIPOS
-*Laboratorio*
 
-- Software :
+*- Software :*
   
 Python (con bibliotecas como PyWavelets para análisis wavelet).
 
 - Herramientas para diseño de filtros digitales
   
-Documentación : Guías teóricas sobre HRV y Transformada Wavelet.
+*Documentación :* Guías teóricas sobre HRV y Transformada Wavelet.
 
 - Estudiante:
   
@@ -38,13 +37,17 @@ El experimento debe demostrar que la Transformada Wavelet ofrece una ventaja sob
 
 # ESTRUCUTURA DEL EXPERIMENTO 
 
-*1)Fundamento Teórico* 
+*1) Fundamento Teórico* 
 
 - Sistema nervioso autónomo (SNA) :
   
-Sistema simpático : Responsable de la respuesta "lucha o huida" (aumenta frecuencia cardíaca).
+# Sistema simpático: 
 
-Sistema parasimpático : Promueve la relajación ("descanso y digestión").
+Es el responsable de la respuesta "lucha o huida" (aumenta frecuencia cardíaca).
+
+# Sistema parasimpático :
+
+Promueve la relajación ("descanso y digestión").
 
 - Variabilidad de la frecuencia cardíaca (HRV) :
   
@@ -58,20 +61,27 @@ LF (0.04–0.15 Hz) : Relacionada con actividad simpática.
 
 HF (0.15–0.4 Hz) : Relacionada con actividad parasimpática.
 
-- Transformada Wavelet :
+# - Transformada Wavelet :
   
-La Transformada Wavelet es una técnica matemática utilizada para el análisis de señales y datos. A diferencia de la Transformada de Fourier, que proporciona información sobre la frecuencia, la Transformada Wavelet permite una representación tanto en el dominio del tiempo como en el de la frecuencia, lo que la hace especialmente útil para señales no estacionarias.
+Transformada Wavelet La Transformada Wavelet es una técnica de análisis matemático que permite descomponer una señal en sus componentes de frecuencia y temporal. A diferencia de la Transformada de Fourier, que solo proporciona información de frecuencia, la Transformada Wavelet ofrece una representación de la señal que es simultáneamente en el dominio del tiempo y en el dominio de la frecuencia. Esto es especialmente útil para señales no estacionarias, como las señales ECG.
 
-Análisis tiempo-frecuencia para señales no estacionarias.
+La wavelet Morlet combina una onda sinusoidal y una envoltura gaussiana. Esto significa que tiene la forma de una onda que se modula (cambia) de manera suave, lo que nos permite observar diferentes detalles de la señal que estamos analizando. Esta combinación nos ayuda a identificar patrones en la señal que podrían no ser visibles de otra manera.
+
+*Bandas de Frecuencia (Análisis Wavelet)*
+
+Baja frecuencia (0.04 - 0.15 Hz): Actividad simpática
+
+Alta frecuencia (0.15 - 0.4 Hz): Tono parasimpático
 
 
-*2)Adquisición de la señal ECG*
+*2) Adquisición de la señal ECG*
+
 se escoge al paciente de prueba y que este mismo este en condiciones de reposo como ejemplo acostado o sentado pero debe estar en un estado calmado ,se debe Limpiar la zona donde se colocarán los electrodos para reducir la resistencia de la piel y mejorar la conductividad esto con ayuda de la gel para los electrodos.
 
 [![imagen-2025-05-01-154555335.png](https://i.postimg.cc/NjKTyBZW/imagen-2025-05-01-154555335.png)](https://postimg.cc/JsWtvVrq)
 
 Se deben colocar los electrodos como se muestra en la imagen anterior, despues de colocar los electrodos el sujeto debe  permanezca inmóvil durante la grabación para evitar artefactos por movimiento.
-Ya con la preparacion atencian lo siguiente en resvisar es el sistema de adquisición (DAQ)concentado el módulo de captura AD8232  al sistema DAQ y Verificar que la frecuencia de muestreo sea ≥ 250 Hz.
+Ya con la preparación  lo siguiente en resvisar es el sistema de adquisición (DAQ)concentado el módulo de captura AD8232  al sistema DAQ y Verificar que la frecuencia de muestreo sea ≥ 250 Hz.
 
 # PROCEDIMINETO 
 
@@ -106,7 +116,8 @@ el codigo que se uso para esto fue el siguiente:
 
  El diseño del filtro se realiza en la función butter_lowpass, donde se calcula primero la frecuencia de Nyquist (la mitad de la frecuencia de muestreo) y se usa para normalizar la frecuencia de corte deseada tambien 
 muestra los coeficientes del filtro, que se usarán en la ecuación usando la ecuacion 
-y[n]=b 0 x[n]+b 1 x[n−1]+⋯−a 1 y[n−1]−a 2 y[n−2]+⋯
+
+# y[n]=b 0 x[n]+b 1 x[n−1]+⋯−a 1 y[n−1]−a 2 y[n−2]+⋯
 
 - los parametros del filtro son:
   
@@ -133,24 +144,24 @@ frecuencia de Nyquist= fs/2​ = 250/2 =125 Hz
 
 Frecuencia normalizada= 45/125 =0.36
 
-# *3)Detección de Picos R*
+# *3) Detección de Picos R*
 
     picos, _ = find_peaks(señal_filtrada, height=np.max(señal_filtrada)*0.5, distance=0.4*fs)
 
 Los picos R se detectan con find_peaks() aplicada sobre la señal ECG filtrada. Se ajusta un umbral de altura y una distancia mínima entre picos para garantizar que solo se detecten los verdaderos picos R. Esta parte del código es fundamental porque los intervalos entre picos R son la base del análisis de HRV, tanto en el dominio del tiempo como en la transformada wavelet.
 
-# *4)Cálculo de Intervalos R-R*
+# *4) Cálculo de Intervalos R-R*
 ​
 El cálculo de los intervalos R-R se hace tomando la diferencia entre las posiciones de los picos R consecutivos (np.diff(picos)) y dividiendo entre la frecuencia de muestreo (fs) para obtener el resultado en segundos. Estos valores representan el tiempo entre latidos y son fundamentales para calcular los parámetros de variabilidad de la frecuencia cardíaca.
 
-# *5)Desviación estándar de los intervalos R-R: Refleja la dispersión y la variabilidad general de la seña*
+# *5) Desviación estándar de los intervalos R-R: Refleja la dispersión y la variabilidad general de la seña*
 
     sdnn = np.std(intervalos_rr)
 
 
  la línea sdnn = np.std(intervalos_rr) calcula la desviación estándar de todos los intervalos R-R detectados, lo cual representa la variabilidad global de la frecuencia cardíaca del sujeto durante los 5 minutos de grabación. Este valor es uno de los principales indicadores en el dominio del tiempo dentro del análisis de HRV.
 
- # *6)Transformada Wavelet en Ventanas*
+ # *6) Transformada Wavelet en Ventanas*
 
     def calcular_espectrograma_wavelet(signal, fs):
     scales = np.arange(1, 40)
@@ -191,7 +202,7 @@ El espectrograma generado a partir de la Transformada Wavelet Continua (CWT) pre
 
  - *Media R-R: 1.805 s*
    
-Significa que, en promedio, el tiempo entre dos latidos es de 1.805 segundos.
+Significa que en promedio, el tiempo entre dos latidos es de 1.805 segundos.
 
 Esto equivale a una frecuencia cardíaca promedio de aproximadamente 33.2 latidos por minuto (calculado como 
 60/1805).
