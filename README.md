@@ -180,9 +180,10 @@ El cálculo de los intervalos R-R se hace tomando la diferencia entre las posici
 la transformada wavelet  toma la señal de intervalos R-R, la descompone en múltiples escalas (frecuencias) usando la wavelet Morlet, y genera un espectrograma que muestra cómo varía la energía en diferentes bandas de frecuencia a lo largo del tiempo. Esto permite evaluar dinámicamente la actividad simpática y parasimpática, lo cual es el objetivo principal del laboratorio.
 
 # RESULTADOS 
+
 - *1) grafica de la señal obtenida*
 
- [![imagen-2025-05-01-181032449.png](https://i.postimg.cc/G3g8Y9Gq/imagen-2025-05-01-181032449.png)](https://postimg.cc/kD8gPJjb)
+[![Captura-de-pantalla-2025-05-02-111233.png](https://i.postimg.cc/Y9GJhTkW/Captura-de-pantalla-2025-05-02-111233.png)](https://postimg.cc/dkFWfHhs)
 
 - *2) grafica de la señal obtenida con filtro*
 
